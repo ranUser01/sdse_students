@@ -7,7 +7,7 @@ public class CityRecord {
     private int population;
 
     public CityRecord(int i, int y, String c,int p){
-        id = i; year = y; city = c; population = p; 
+        this.id = i; this.year = y; this.city = c; this.population = p; 
     }
 
     @Override
