@@ -32,9 +32,13 @@ public class CityCSVProcessor {
 				CityRecord cr = new CityRecord(id, year, city, population);
 				System.out.println("New city record loaded \n" + cr);
 
-				allRecords.add(id, cr);
+				allRecords.add(cr);
 
 			}
+
+			Map<String, List<CityRecord>> hm = records2Map(allRecords);
+
+			city_stats(hm);
 
 			return allRecords;
 
@@ -84,15 +88,45 @@ public class CityCSVProcessor {
 		return filteredRecords;
 	}
 
-	private static Map<String, List<CityRecord>> records2Map(List<CityRecord> records){
-	
+	private static Map<String, List<CityRecord>> records2Map(List<CityRecord> records) {
+
 		Map<String, List<CityRecord>> recordMap = new HashMap<String, List<CityRecord>>(); // init the hash map
 		List<String> cities = getUniqueCities(records);
 
-		for (String city: cities){
-			recordMap.put(city, filterCityRecords(records, city)); 
+		for (String city : cities) {
+			recordMap.put(city, filterCityRecords(records, city));
 		}
 		return recordMap;
+	}
+
+	private void city_stats(Map<String, List<CityRecord>> cityRecordsMap) {
+		for (Map.Entry<String, List<CityRecord>> entry : cityRecordsMap.entrySet()) {
+			String cityName = entry.getKey(); // Get the city name (key)
+			List<CityRecord> cityRecords = entry.getValue(); // Get the list of CityRecord objects (value)
+
+			int count_entries = 0;
+			int total_population = 0;
+			int min_year = 2100;
+			int max_year = 0;
+
+			for (CityRecord record : cityRecords) {
+				count_entries += 1;
+				total_population += record.getPopulation();
+				if (min_year > record.getYear()) {
+					min_year = record.getYear();
+				}
+				if (max_year < record.getYear()) {
+					max_year = record.getYear();
+				}
+			}
+
+			System.out.println("City: " + cityName + ", Number of Entries: " + count_entries +
+					", Total Population: " + total_population +
+					", Average population: " + total_population/count_entries +
+					", Minimum Year: " + min_year +
+					", Maximum Year: " + max_year);
+
+		}
 	}
 
 	public static final void main(String[] args) {
