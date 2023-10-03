@@ -1,3 +1,5 @@
+package edu.sdse.csvprocessor;
+
 public class CityRecord {
     private int id; 
     private int year;
@@ -15,5 +17,17 @@ public class CityRecord {
 
     public int getID(){
         return id;
+    }
+
+    public int getYear(){
+        return year;
+    }
+
+    public String getCity(){
+        return city;
+    }
+
+    public int getPopulation(){
+        return population;
     }
 }

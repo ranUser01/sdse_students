@@ -22,10 +22,11 @@ public class CityCSVProcessor {
 				int year = convertToInt(rawValues[1]);
 				String city = convertToString(rawValues[2]);
 				int population = convertToInt(rawValues[3]);
-				
-				System.out.println("id: " + id + ", year: " + year + ", city: " + city + ", population: " + population);
-				
+
 				//TODO: Extend the program to process entries!
+				CityRecord cr = new CityRecord(id,year,city,population);
+				System.out.println("New city record loaded \n" + cr);
+				
 			}
 		} catch (Exception e) {
 			System.err.println("An error occurred:");
